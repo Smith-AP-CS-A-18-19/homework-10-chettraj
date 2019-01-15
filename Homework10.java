@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 
 public class Homework10 {
+	private int[][] stuff;
 
 	/* Finish the constructor and create any necessary instance
 	 * variables. The constructor should create and save a
@@ -8,6 +9,12 @@ public class Homework10 {
 	 * columns
 	 */
 	public Homework10(int rows, int cols) {
+		stuff = new int[rows][cols];
+		for (int r = 0; r < rows; r++){
+			for (int c = 0; c < cols; c++){
+				stuff[r][c] = 0;
+			}
+		}
 
 	}
 
@@ -17,13 +24,19 @@ public class Homework10 {
 	 * row major order. Return the filled array
 	 */
 	public int[][] problem1(int n) {
-
+		for (int r = 0; r < stuff.length; r++){
+			for (int c = 0; c < stuff[0].length; c++){
+				stuff[r][c] = n;
+				n++;
+			}
+		}
+	return stuff;
 	}
 
 	/* Return row r of the stored array
 	 */
 	public int[] problem2(int r) {
-
+		return stuff[r];
 	}
 
 	/* Find and return the sum of the indicated cell and its
@@ -32,13 +45,31 @@ public class Homework10 {
 	 * or more neighbors
 	 */
 	public int problem3(int r, int c) {
-
+		int sum = stuff[r][c];
+		if (r - 1 >= 0){
+			sum += stuff[r-1][c];
+		}
+		if (r + 1 < stuff.length){
+			sum += stuff[r+1][c];
+		}
+		if (c + 1 < stuff[0].length){
+			sum += stuff [r][c+1];
+		}
+		if (c - 1 >= 0){
+			sum += stuff[r][c-1];
+		}
+		return sum;
 	}
 
 	/* Create and return an ArrayList that contains the
 	 * elements from the indicated column
 	 */
 	public ArrayList<Integer> problem4(int c) {
+		ArrayList<Integer> list = new ArrayList<Integer>();
+		for(int r = 0; r < stuff.length; r++){
+			list.add(stuff[r][c]);
+		}
+		return list;
 
 	}
 
@@ -46,7 +77,11 @@ public class Homework10 {
 	 * the supplied ArrayList
 	 */
 	public int problem5(ArrayList<Integer> aList) {
-
+		int sum = 0;
+		for(int i = 0; i < aList.size(); i++){
+			sum += aList.get(i);
+		}
+		return sum;
 	}
 
 	public static void main(String[] args) {
